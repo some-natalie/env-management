@@ -13,9 +13,9 @@ jobs:
         env:
           HOSTNAME: test-environment-best-environment
       - name: second test
-        if: ${{ job.build.environment != "prod" }}
+        if: ${{ job.build.environment == "prod" }}
         run: |
-          echo "this ain't production"
+          echo "this is really production, oh no"
   uat:
     runs-on: ubuntu-latest
     environment: uat
