@@ -13,7 +13,7 @@ jobs:
         env:
           HOSTNAME: test-environment-best-environment
       - name: second test
-        if: ${{ jobs.build.environment != "prod" }}
+        if: ${{ job.build.environment != "prod" }}
         run: |
           echo "this ain't production"
   uat:
