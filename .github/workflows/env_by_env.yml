@@ -1,0 +1,32 @@
+name: env_by_env
+
+on: workflow_dispatch 
+
+jobs:
+  build:
+    runs-on: ubuntu-latest 
+    environment: test
+    steps:
+      - name: test
+        run: |
+          echo "The hostname for test is:  ${{env.HOSTNAME}}"
+        env:
+          HOSTNAME: test-environment-best-environment
+  uat:
+    runs-on: ubuntu-latest
+    environment: uat
+    steps:
+      - name: poke the uat team
+        run: |
+          echo "hey QA team, plz log in to ${{env.HOSTNAME}} to test this thing"
+        env:
+          HOSTNAME: uat-wont-blow-up
+  prod:
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+      - name: throw it into production
+        run: |
+          echo "yolo, this is production at ${{env.HOSTNAME}}"
+        env:
+          HOSTNAME: prod-is-super-serious-business
