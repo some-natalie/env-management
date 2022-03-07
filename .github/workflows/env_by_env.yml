@@ -12,6 +12,10 @@ jobs:
           echo "The hostname for test is:  ${{env.HOSTNAME}}"
         env:
           HOSTNAME: test-environment-best-environment
+      - name: second test
+        if: ${{ jobs.build.environment != "prod" }}
+        run: |
+          echo "this ain't production"
   uat:
     runs-on: ubuntu-latest
     environment: uat
