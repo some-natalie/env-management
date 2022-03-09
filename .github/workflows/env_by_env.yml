@@ -12,28 +12,28 @@ jobs:
           echo "The hostname for test is:  ${{env.HOSTNAME}}"
         env:
           HOSTNAME: test-environment-best-environment
-      - name: second test
+      - name: second test  # this skips because it's not production
         if: job.build.environment == 'prod'
         run: |
           echo "this is really production, oh no"
   uat:
     runs-on: ubuntu-latest
     environment: uat
-    needs: build
+    needs: build  # won't run unless "build" is successful
     steps:
       - name: poke the uat team
         run: |
           echo "hey QA team, plz log in to ${{env.HOSTNAME}} to test this thing"
         env:
           HOSTNAME: uat-wont-blow-up
-      - name: second test
+      - name: second test  # this will run because it's not production
         if: job.build.environment != 'prod'
         run: |
           echo "really not production, but as close as we could get"
   prod:
     runs-on: ubuntu-latest
     environment: prod
-    needs: uat
+    needs: uat  # wait for "uat" to finish successfully
     steps:
       - name: throw it into production
         run: |
