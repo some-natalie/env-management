@@ -15,7 +15,7 @@ jobs:
 
     - name: Import environment variables from a file
       id: import-env
-      uses: cardinalby/export-env-action@v1.0.0
+      uses: cardinalby/export-env-action@v1
       with:
         envFile: 'dot-env'
 
