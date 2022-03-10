@@ -26,5 +26,5 @@ jobs:
     steps:
     - name: Print environment variable
       run: | 
-        echo ${{ steps.import-env.outputs.HOSTNAME }}
-        echo ${{ steps.import-env.outputs.PORT }}
+        echo "hostname - '${{ steps.import-env.outputs.HOSTNAME }}'"
+        echo '${{ steps.import-env.outputs.PORT }}'
